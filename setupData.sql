@@ -1,6 +1,3 @@
--- Sample Data for Coffee Shop Database
-
--- Insert Customers
 INSERT INTO customers (name, email, phone, loyalty_points, join_date) VALUES
 ('Alice Johnson', 'alice@email.com', '555-0101', 150, '2024-01-15'),
 ('Bob Smith', 'bob@email.com', '555-0102', 89, '2024-02-20'),
@@ -13,9 +10,7 @@ INSERT INTO customers (name, email, phone, loyalty_points, join_date) VALUES
 ('Isabel Garcia', 'isabel@email.com', '555-0109', 160, '2024-01-08'),
 ('Jack Anderson', 'jack@email.com', '555-0110', 110, '2024-03-15');
 
--- Insert Products
 INSERT INTO products (name, category, price, cost, in_stock) VALUES
--- Coffee Products
 ('Espresso', 'coffee', 3.50, 0.80, 1),
 ('Latte', 'coffee', 4.50, 1.20, 1),
 ('Cappuccino', 'coffee', 4.25, 1.10, 1),
@@ -24,13 +19,13 @@ INSERT INTO products (name, category, price, cost, in_stock) VALUES
 ('Mocha', 'coffee', 5.25, 1.50, 1),
 ('Macchiato', 'coffee', 4.75, 1.25, 1),
 ('Frappuccino', 'coffee', 5.75, 1.80, 1),
--- Tea Products
+
 ('Green Tea', 'tea', 3.00, 0.50, 1),
 ('Chai Latte', 'tea', 4.00, 1.00, 1),
 ('Earl Grey', 'tea', 3.25, 0.60, 1),
 ('Herbal Tea', 'tea', 3.50, 0.70, 1),
 ('Matcha Latte', 'tea', 4.75, 1.40, 1),
--- Pastry Products
+
 ('Croissant', 'pastry', 3.50, 1.20, 1),
 ('Blueberry Muffin', 'pastry', 3.75, 1.30, 1),
 ('Chocolate Chip Cookie', 'pastry', 2.50, 0.80, 1),
@@ -38,14 +33,14 @@ INSERT INTO products (name, category, price, cost, in_stock) VALUES
 ('Scone', 'pastry', 3.25, 1.10, 1),
 ('Bagel', 'pastry', 2.75, 0.90, 1),
 ('Cinnamon Roll', 'pastry', 4.50, 1.60, 1),
--- Merchandise
+
 ('Coffee Mug', 'merchandise', 12.99, 5.00, 1),
 ('Travel Tumbler', 'merchandise', 18.99, 7.50, 1),
 ('Coffee Beans (1lb)', 'merchandise', 15.99, 8.00, 1),
 ('T-Shirt', 'merchandise', 22.99, 10.00, 1),
 ('Tote Bag', 'merchandise', 14.99, 6.00, 1);
 
--- Insert Employees
+
 INSERT INTO employees (name, position, hourly_rate, hire_date) VALUES
 ('Sarah Martinez', 'manager', 22.50, '2023-06-01'),
 ('John Kim', 'barista', 16.00, '2023-09-15'),
@@ -54,8 +49,7 @@ INSERT INTO employees (name, position, hourly_rate, hire_date) VALUES
 ('Anna Rodriguez', 'barista', 16.25, '2024-02-14'),
 ('Tom Wilson', 'cashier', 15.75, '2024-04-05');
 
--- Insert sample orders (last 30 days)
--- Note: This is a simplified version. The Python script generates more realistic random data.
+
 INSERT INTO orders (customer_id, employee_id, order_date, total_amount, payment_method) VALUES
 (1, 2, '2024-09-28 08:30:00', 7.75, 'card'),
 (2, 3, '2024-09-28 09:15:00', 12.50, 'mobile'),
@@ -68,7 +62,6 @@ INSERT INTO orders (customer_id, employee_id, order_date, total_amount, payment_
 (1, 2, '2024-09-25 08:15:00', 4.50, 'mobile'),
 (7, 4, '2024-09-24 12:00:00', 18.75, 'card');
 
--- Insert corresponding order items
 INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES
 -- Order 1: Latte + Cookie
 (1, 2, 1, 4.50),
@@ -104,9 +97,9 @@ INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALU
 (10, 14, 1, 3.50),
 (10, 23, 1, 15.99);
 
--- Insert employee shifts (last 7 days)
+
 INSERT INTO shifts (employee_id, shift_date, start_time, end_time) VALUES
--- Manager works 9-5 daily
+
 (1, '2024-09-29', '09:00', '17:00'),
 (1, '2024-09-28', '09:00', '17:00'),
 (1, '2024-09-27', '09:00', '17:00'),
@@ -115,7 +108,7 @@ INSERT INTO shifts (employee_id, shift_date, start_time, end_time) VALUES
 (1, '2024-09-24', '09:00', '17:00'),
 (1, '2024-09-23', '09:00', '17:00'),
 
--- Baristas and cashiers work various shifts
+
 (2, '2024-09-29', '06:00', '14:00'),
 (3, '2024-09-29', '14:00', '22:00'),
 (4, '2024-09-29', '08:00', '16:00'),
@@ -148,7 +141,7 @@ INSERT INTO shifts (employee_id, shift_date, start_time, end_time) VALUES
 (5, '2024-09-23', '06:00', '14:00'),
 (6, '2024-09-23', '10:00', '18:00');
 
--- Insert inventory restocks
+
 INSERT INTO inventory_restocks (product_id, quantity, restock_date, supplier) VALUES
 (1, 50, '2024-09-25', 'Premium Coffee Suppliers'),
 (2, 40, '2024-09-25', 'Premium Coffee Suppliers'),

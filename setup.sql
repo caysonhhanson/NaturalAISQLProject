@@ -1,6 +1,3 @@
--- Coffee Shop Database Schema
-
--- Customers table
 CREATE TABLE customers (
     customer_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -10,7 +7,6 @@ CREATE TABLE customers (
     join_date DATE DEFAULT CURRENT_DATE
 );
 
--- Products table (coffee, pastries, merchandise)
 CREATE TABLE products (
     product_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -20,7 +16,6 @@ CREATE TABLE products (
     in_stock BOOLEAN DEFAULT 1
 );
 
--- Employees table
 CREATE TABLE employees (
     employee_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -29,7 +24,6 @@ CREATE TABLE employees (
     hire_date DATE NOT NULL
 );
 
--- Orders table
 CREATE TABLE orders (
     order_id INTEGER PRIMARY KEY AUTOINCREMENT,
     customer_id INTEGER,
@@ -41,7 +35,6 @@ CREATE TABLE orders (
     FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
 );
 
--- Order Items table (many-to-many between orders and products)
 CREATE TABLE order_items (
     order_item_id INTEGER PRIMARY KEY AUTOINCREMENT,
     order_id INTEGER NOT NULL,
@@ -52,7 +45,6 @@ CREATE TABLE order_items (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
--- Shifts table
 CREATE TABLE shifts (
     shift_id INTEGER PRIMARY KEY AUTOINCREMENT,
     employee_id INTEGER NOT NULL,
@@ -62,7 +54,6 @@ CREATE TABLE shifts (
     FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
 );
 
--- Inventory Restocks table
 CREATE TABLE inventory_restocks (
     restock_id INTEGER PRIMARY KEY AUTOINCREMENT,
     product_id INTEGER NOT NULL,
