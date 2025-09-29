@@ -467,4 +467,4 @@ if __name__ == "__main__":
     
     # Start interactive mode
     # Uncomment the line below to enable interactive questioning
-    # interactive_mode()
+interactive_mode()
