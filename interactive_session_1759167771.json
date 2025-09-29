@@ -1,0 +1,40 @@
+{
+  "session_started": 1759167615.069176,
+  "questions": [
+    {
+      "question": "How many total customers do we have?",
+      "sql": "SELECT COUNT(*) FROM customers;",
+      "queryRawResponse": "[(10,)]",
+      "friendlyResponse": "We currently have a total of 10 customers. Thank you for asking!",
+      "error": null
+    },
+    {
+      "question": "Which products has the highest total sales revenue",
+      "sql": "ite\nSELECT p.name, SUM(oi.quantity * oi.price_at_purchase) AS total_revenue\nFROM order_items oi\nJOIN products p ON oi.product_id = p.product_id\nGROUP BY p.product_id\nORDER BY total_revenue DESC\nLIMIT 1;",
+      "queryRawResponse": "",
+      "friendlyResponse": "",
+      "error": "near \"ite\": syntax error"
+    },
+    {
+      "question": "what are the busiest hours of the day?",
+      "sql": "SELECT STRFTIME('%H', order_date) AS hour, COUNT(*) AS order_count\nFROM orders\nGROUP BY hour\nORDER BY order_count DESC;",
+      "queryRawResponse": "[('08', 3), ('16', 1), ('14', 1), ('12', 1), ('11', 1), ('10', 1), ('09', 1), ('07', 1)]",
+      "friendlyResponse": "The busiest hour of the day is 8 AM, with three recorded activities. The rest of the hours have only one activity each, making 8 AM the stand-out busy time!",
+      "error": null
+    },
+    {
+      "question": "Which employee handled the most orders?",
+      "sql": "SELECT e.name, e.employee_id, COUNT(o.order_id) AS order_count\nFROM employees e\nJOIN orders o ON e.employee_id = o.employee_id\nGROUP BY e.employee_id\nORDER BY order_count DESC\nLIMIT 1;",
+      "queryRawResponse": "[('John Kim', 2, 4)]",
+      "friendlyResponse": "It looks like John Kim handled the most orders, with a total of 4! Keep up the great work, John!",
+      "error": null
+    },
+    {
+      "question": "Which supplier provide the most products",
+      "sql": "SELECT supplier, COUNT(product_id) AS product_count\nFROM inventory_restocks\nGROUP BY supplier\nORDER BY product_count DESC\nLIMIT 1;",
+      "queryRawResponse": "[('Premium Coffee Suppliers', 4)]",
+      "friendlyResponse": "It looks like Premium Coffee Suppliers offer the most products with a total of 4! Let me know if you need more information.",
+      "error": null
+    }
+  ]
+}

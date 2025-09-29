@@ -1,31 +1,4 @@
 {
-  "database": {
-    "name": "coffee_shop.db",
-    "type": "sqlite3"
-  },
-  "openai": {
-    "model": "gpt-3.5-turbo",
-    "temperature": 0,
-    "max_tokens": 1000
-  },
-  "prompting_strategies": [
-    "zero-shot",
-    "few-shot", 
-    "chain-of-thought"
-  ],
-  "sample_questions": [
-    "How many total customers do we have?",
-    "What is the most popular product?",
-    "What was our total revenue yesterday?",
-    "Which employee has processed the most orders?",
-    "What is the average order value?",
-    "Show me all products that are pastries",
-    "Who is our best customer by loyalty points?",
-    "How many lattes were sold in the last week?"
-  ],
-  "app_settings": {
-    "verbose_mode": true,
-    "max_results_display": 10,
-    "enable_interactive_mode": true
-  }
+  "openaiKey": "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"
 }
+

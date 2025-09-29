@@ -1,0 +1,61 @@
+{
+  "session_started": 1759167790.90497,
+  "questions": [
+    {
+      "question": "who are the top 5 customers by total spending",
+      "sql": "SELECT c.customer_id, c.name, SUM(o.total_amount) AS total_spent\nFROM customers c\nJOIN orders o ON c.customer_id = o.customer_id\nGROUP BY c.customer_id, c.name\nORDER BY total_spent DESC\nLIMIT 5;",
+      "queryRawResponse": "[(2, 'Bob Smith', 23.75), (1, 'Alice Johnson', 21.5), (7, 'Grace Lee', 18.75), (4, 'David Wilson', 15.75), (6, 'Frank Miller', 13.5)]",
+      "friendlyResponse": "Sure thing! Here are the top 5 customers by total spending: \n\n1. Bob Smith with $23.75\n2. Alice Johnson with $21.50\n3. Grace Lee with $18.75\n4. David Wilson with $15.75\n5. Frank Miller with $13.50\n\nThanks for asking! If you have more questions, feel free to ask.",
+      "error": null
+    },
+    {
+      "question": "What are the top 3 most popular drinks?",
+      "sql": "SELECT p.name, SUM(oi.quantity) AS total_sold\nFROM order_items oi\nJOIN products p ON oi.product_id = p.product_id\nWHERE p.category IN ('coffee', 'tea')\nGROUP BY p.name\nORDER BY total_sold DESC\nLIMIT 3;",
+      "queryRawResponse": "[('Latte', 2), ('Espresso', 2), ('Mocha', 1)]",
+      "friendlyResponse": "Sure! Based on the data, the top three most popular drinks are tied between Latte and Espresso, each with 2 votes, followed by Mocha with 1 vote. Enjoy your drink choice!",
+      "error": null
+    },
+    {
+      "question": "Which day of the week has highest sales?",
+      "sql": "SELECT strftime('%w', order_date) AS day_of_week, SUM(total_amount) AS total_sales\nFROM orders\nGROUP BY day_of_week\nORDER BY total_sales DESC\nLIMIT 1;",
+      "queryRawResponse": "[('6', 26.5)]",
+      "friendlyResponse": "Based on the data, it looks like Saturday is the day with the highest sales, with a total of 26.5 units sold. Enjoy your weekend shopping! \ud83d\ude0a",
+      "error": null
+    },
+    {
+      "question": "Whats the average revenue per order per employee?",
+      "sql": "SELECT e.employee_id, e.name, AVG(o.total_amount) AS avg_revenue_per_order\nFROM employees e\nJOIN orders o ON e.employee_id = o.employee_id\nGROUP BY e.employee_id;",
+      "queryRawResponse": "[(2, 'John Kim', 7.5), (3, 'Lisa Chen', 13.916666666666666), (4, 'Mike Thompson', 12.083333333333334)]",
+      "friendlyResponse": "Sure! Here's a quick breakdown of the average revenue per order per employee based on your data: John Kim has an average of $7.50, Lisa Chen brings in an average of $13.92, and Mike Thompson averages $12.08. Let me know if you need anything else!",
+      "error": null
+    },
+    {
+      "question": "How much did we spend on ingredients last month?",
+      "sql": "SELECT SUM(quantity * cost) AS total_spent\nFROM inventory_restocks\nJOIN products ON inventory_restocks.product_id = products.product_id\nWHERE strftime('%Y-%m', restock_date) = strftime('%Y-%m', 'now', '-1 month');",
+      "queryRawResponse": "[(None,)]",
+      "friendlyResponse": "It looks like the database didn't provide any specific details on last month's spending for ingredients. You might want to double-check the data entry or try running the query again. Let me know if there's anything else I can help with!",
+      "error": null
+    },
+    {
+      "question": "which product combinations are most commonly bought together?",
+      "sql": "SELECT p1.name AS product1, p2.name AS product2, COUNT(*) AS combo_count\nFROM order_items oi1\nJOIN order_items oi2 ON oi1.order_id = oi2.order_id AND oi1.product_id < oi2.product_id\nJOIN products p1 ON oi1.product_id = p1.product_id\nJOIN products p2 ON oi2.product_id = p2.product_id\nGROUP BY p1.name, p2.name\nORDER BY combo_count DESC;",
+      "queryRawResponse": "[('Americano', 'Blueberry Muffin', 1), ('Blueberry Muffin', 'Chocolate Chip Cookie', 1), ('Cappuccino', 'Coffee Mug', 1), ('Cappuccino', 'Croissant', 1), ('Chai Latte', 'Cinnamon Roll', 1), ('Cold Brew', 'Bagel', 1), ('Cold Brew', 'Scone', 1), ('Croissant', 'Coffee Beans (1lb)', 1), ('Croissant', 'Coffee Mug', 1), ('Espresso', 'Coffee Beans (1lb)', 1), ('Espresso', 'Croissant', 1), ('Frappuccino', 'Blueberry Muffin', 1), ('Frappuccino', 'Chocolate Chip Cookie', 1), ('Latte', 'Chocolate Chip Cookie', 1), ('Matcha Latte', 'Travel Tumbler', 1), ('Mocha', 'Danish', 1), ('Scone', 'Bagel', 1)]",
+      "friendlyResponse": "It looks like our customers enjoy pairing different treats and beverages! Some popular combos include an Americano with a Blueberry Muffin, a Cappuccino with a Croissant, and a Chai Latte with a Cinnamon Roll. For those who love coffee, Espresso with a Croissant is also a favorite. It's great to see how each item complements another, making for delicious pairings!",
+      "error": null
+    },
+    {
+      "question": "whcih employee serves the highest-spending customers?",
+      "sql": "SELECT e.name, SUM(o.total_amount) AS total_sales\nFROM employees e\nJOIN orders o ON e.employee_id = o.employee_id\nGROUP BY e.employee_id\nORDER BY total_sales DESC\nLIMIT 1;",
+      "queryRawResponse": "[('Lisa Chen', 41.75)]",
+      "friendlyResponse": "It looks like Lisa Chen serves the highest-spending customers, with an impressive amount of 41.75!",
+      "error": null
+    },
+    {
+      "question": "which customers haven't ordered in the last 2 months?",
+      "sql": "SELECT c.customer_id, c.name, c.email\nFROM customers c\nLEFT JOIN orders o ON c.customer_id = o.customer_id AND o.order_date >= date('now', '-2 months')\nWHERE o.order_id IS NULL;",
+      "queryRawResponse": "[(1, 'Alice Johnson', 'alice@email.com'), (2, 'Bob Smith', 'bob@email.com'), (3, 'Carol Davis', 'carol@email.com'), (4, 'David Wilson', 'david@email.com'), (5, 'Emma Brown', 'emma@email.com'), (6, 'Frank Miller', 'frank@email.com'), (7, 'Grace Lee', 'grace@email.com'), (8, 'Henry Taylor', 'henry@email.com'), (9, 'Isabel Garcia', 'isabel@email.com'), (10, 'Jack Anderson', 'jack@email.com')]",
+      "friendlyResponse": "Sure! Here are the customers who haven't placed an order in the last two months:\n\n1. Alice Johnson\n2. Bob Smith\n3. Carol Davis\n4. David Wilson\n5. Emma Brown\n6. Frank Miller\n7. Grace Lee\n8. Henry Taylor\n9. Isabel Garcia\n10. Jack Anderson\n\nIf you need any more information, feel free to ask!",
+      "error": null
+    }
+  ]
+}
