@@ -54,13 +54,13 @@ JOIN products p1 ON oi1.product_id = p1.product_id
 JOIN products p2 ON oi2.product_id = p2.product_id
 GROUP BY oi1.product_id, oi2.product_id
 ORDER BY combo_count DESC;
-
-
+```
+```sql
 SQL Result:
 [('Americano', 'Blueberry Muffin', 1), 
  ('Blueberry Muffin', 'Chocolate Chip Cookie', 1), 
  ('Cappuccino', 'Croissant', 1)]
-'''
+```
 Friendly Response:
 
 Customers frequently pair drinks with pastries! Examples include: Americano with Blueberry Muffin, Cappuccino with Croissant, and Blueberry Muffin with Chocolate Chip Cookie.
